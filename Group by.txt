@@ -1,0 +1,125 @@
+mysql> SELECT address, district FROM address ORDER BY district LIMIT 10;
++-------------------------+-------------+
+| address                 | district    |
++-------------------------+-------------+
+| 1368 Maracabo Boulevard |             |
+| 962 Tama Loop           |             |
+| 18 Duisburg Boulevard   |             |
+| 669 Firozabad Loop      | Abu Dhabi   |
+| 535 Ahmadnagar Manor    | Abu Dhabi   |
+| 1078 Stara Zagora Drive | Aceh        |
+| 663 Baha Blanca Parkway | Adana       |
+| 842 Salzburg Lane       | Adana       |
+| 614 Pak Kret Street     | Addis Abeba |
+| 751 Lima Loop           | Aden        |
++-------------------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT district, COUNT(*) FROM address GROUP BY district LIMIT 10;
++----------------+----------+
+| district       | COUNT(*) |
++----------------+----------+
+| Alberta        |        2 |
+| QLD            |        2 |
+| Nagasaki       |        1 |
+| California     |        9 |
+| Attika         |        1 |
+| Mandalay       |        1 |
+| Nantou         |        2 |
+| Texas          |        5 |
+| Central Serbia |        1 |
+| Hamilton       |        1 |
++----------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT district, COUNT(*) AS no_of_address FROM address GROUP BY district LIMIT 10;
++----------------+---------------+
+| district       | no_of_address |
++----------------+---------------+
+| Alberta        |             2 |
+| QLD            |             2 |
+| Nagasaki       |             1 |
+| California     |             9 |
+| Attika         |             1 |
+| Mandalay       |             1 |
+| Nantou         |             2 |
+| Texas          |             5 |
+| Central Serbia |             1 |
+| Hamilton       |             1 |
++----------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT district, COUNT(*) AS no_of_address FROM address GROUP BY district ORDER BY no_of_address DESC LIMIT 10;
++------------------+---------------+
+| district         | no_of_address |
++------------------+---------------+
+| Buenos Aires     |            10 |
+| West Bengali     |             9 |
+| California       |             9 |
+| Shandong         |             9 |
+| Uttar Pradesh    |             8 |
+| So Paulo         |             8 |
+| Maharashtra      |             7 |
+| England          |             7 |
+| Southern Tagalog |             6 |
+| Punjab           |             5 |
++------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> -- GROUP BY IS ONLY GOING TO RETURN ONE ROW PER GROUP YOU WON't be GETTING THE WHOLE GROUP for ex England is there 7 times but we got a Row saying 7 times;
+
+mysql> SELECT address, district FROM address GROUP BY district LIMIT 10;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lco_films.address.address' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+
+It wont be returning rows 7 times for England it is what the error says!
+
+mysql> SELECT district FROM address GROUP BY district LIMIT 10;
++----------------+
+| district       |
++----------------+
+| Alberta        |
+| QLD            |
+| Nagasaki       |
+| California     |
+| Attika         |
+| Mandalay       |
+| Nantou         |
+| Texas          |
+| Central Serbia |
+| Hamilton       |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> SELECT district FROM address LIMIT 10;
++------------+
+| district   |
++------------+
+| Alberta    |
+| QLD        |
+| Alberta    |
+| QLD        |
+| Nagasaki   |
+| California |
+| Attika     |
+| Mandalay   |
+| Nantou     |
+| Texas      |
++------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT district FROM address LIMIT 10;
++----------------+
+| district       |
++----------------+
+| Alberta        |
+| QLD            |
+| Nagasaki       |
+| California     |
+| Attika         |
+| Mandalay       |
+| Nantou         |
+| Texas          |
+| Central Serbia |
+| Hamilton       |
++----------------+
+10 rows in set (0.00 sec)

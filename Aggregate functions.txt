@@ -1,0 +1,84 @@
+mysql> SELECT COUNT(*) FROM address;
++----------+
+| COUNT(*) |
++----------+
+|      603 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> SELECT COUNT(DISTINCT district) FROM address;
++--------------------------+
+| COUNT(DISTINCT district) |
++--------------------------+
+|                      378 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> DESC film;
++----------------------+---------------------------------------------------------------------+------+-----+-------------------+-----------------------------------------------+
+| Field                | Type                                                                | Null | Key | Default           | Extra                                         |
++----------------------+---------------------------------------------------------------------+------+-----+-------------------+-----------------------------------------------+
+| film_id              | smallint unsigned                                                   | NO   | PRI | NULL              | auto_increment                                |
+| title                | varchar(128)                                                        | NO   | MUL | NULL              |                                               |
+| description          | text                                                                | YES  |     | NULL              |                                               |
+| release_year         | year                                                                | YES  |     | NULL              |                                               |
+| language_id          | tinyint unsigned                                                    | NO   | MUL | NULL              |                                               |
+| original_language_id | tinyint unsigned                                                    | YES  | MUL | NULL              |                                               |
+| rental_duration      | tinyint unsigned                                                    | NO   |     | 3                 |                                               |
+| rental_rate          | decimal(4,2)                                                        | NO   |     | 4.99              |                                               |
+| replacement_cost     | decimal(5,2)                                                        | NO   |     | 19.99             |                                               |
+| rating               | enum('G','PG','PG-13','R','NC-17')                                  | YES  |     | G                 |                                               |
+| special_features     | set('Trailers','Commentaries','Deleted Scenes','Behind the Scenes') | YES  |     | NULL              |                                               |
+| last_update          | timestamp                                                           | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
+| length               | int                                                                 | YES  |     | NULL              |                                               |
++----------------------+---------------------------------------------------------------------+------+-----+-------------------+-----------------------------------------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT * FROM film LIMIT 10;
++---------+------------------+-----------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+------------------+--------+----------------------------------+---------------------+--------+
+| film_id | title            | description                                                                                                           | release_year | language_id | original_language_id | rental_duration | rental_rate | replacement_cost | rating | special_features                 | last_update         | length |
++---------+------------------+-----------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+------------------+--------+----------------------------------+---------------------+--------+
+|       1 | ACADEMY DINOSAUR | A Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies                      |         2019 |           1 |                 NULL |               6 |        0.99 |            20.99 | PG     | Deleted Scenes,Behind the Scenes | 2020-07-30 12:37:53 |   NULL |
+|       2 | ACE GOLDFINGER   | A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China                  |         2018 |           1 |                 NULL |               3 |        4.99 |            12.99 | G      | Trailers,Deleted Scenes          | 2020-07-30 12:37:53 |   NULL |
+|       3 | ADAPTATION HOLES | A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory                      |         2017 |           1 |                 NULL |               7 |        2.99 |            18.99 | NC-17  | Trailers,Deleted Scenes          | 2020-07-30 12:37:53 |   NULL |
+|       4 | AFFAIR PREJUDICE | A Fanciful Documentary of a Frisbee And a Lumberjack who must Chase a Monkey in A Shark Tank                          |         2016 |           1 |                 NULL |               5 |        2.99 |            26.99 | G      | Commentaries,Behind the Scenes   | 2020-07-30 12:37:53 |   NULL |
+|       5 | AFRICAN EGG      | A Fast-Paced Documentary of a Pastry Chef And a Dentist who must Pursue a Forensic Psychologist in The Gulf of Mexico |         2019 |           1 |                 NULL |               6 |        2.99 |            22.99 | G      | Deleted Scenes                   | 2020-07-30 12:37:53 |   NULL |
+|       6 | AGENT TRUMAN     | A Intrepid Panorama of a Robot And a Boy who must Escape a Sumo Wrestler in Ancient China                             |         2015 |           1 |                 NULL |               3 |        2.99 |            17.99 | PG     | Deleted Scenes                   | 2020-07-30 12:37:53 |   NULL |
+|       7 | AIRPLANE SIERRA  | A Touching Saga of a Hunter And a Butler who must Discover a Butler in A Jet Boat                                     |         2014 |           1 |                 NULL |               6 |        4.99 |            28.99 | PG-13  | Trailers,Deleted Scenes          | 2020-07-30 12:37:53 |   NULL |
+|       8 | AIRPORT POLLOCK  | A Epic Tale of a Moose And a Girl who must Confront a Monkey in Ancient India                                         |         2020 |           1 |                 NULL |               6 |        4.99 |            15.99 | R      | Trailers                         | 2020-07-30 12:37:53 |   NULL |
+|       9 | ALABAMA DEVIL    | A Thoughtful Panorama of a Database Administrator And a Mad Scientist who must Outgun a Mad Scientist in A Jet Boat   |         2010 |           1 |                 NULL |               3 |        2.99 |            21.99 | PG-13  | Trailers,Deleted Scenes          | 2020-07-30 12:37:53 |   NULL |
+|      10 | ALADDIN CALENDAR | A Action-Packed Tale of a Man And a Lumberjack who must Reach a Feminist in Ancient China                             |         2012 |           2 |                 NULL |               6 |        4.99 |            24.99 | NC-17  | Trailers,Deleted Scenes          | 2020-07-30 12:37:53 |   NULL |
++---------+------------------+-----------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+------------------+--------+----------------------------------+---------------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT MAX(rental_duration) FROM film;
++----------------------+
+| MAX(rental_duration) |
++----------------------+
+|                    7 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(rental_duration) FROM film;
++----------------------+
+| AVG(rental_duration) |
++----------------------+
+|               4.9850 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(rental_duration) FROM film;
++----------------------+
+| MIN(rental_duration) |
++----------------------+
+|                    3 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(rental_duration) FROM film;
++----------------------+
+| SUM(rental_duration) |
++----------------------+
+|                 4985 |
++----------------------+
+1 row in set (0.00 sec)

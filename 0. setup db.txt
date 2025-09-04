@@ -1,0 +1,9 @@
+
+arsh@DESKTOP-9FHC837:~$ mysql -u root -p < lco_films_query.sql
+Enter password:
+
+arsh@DESKTOP-9FHC837:~$ mysql -u root -p
+Enter password:
+
+
+

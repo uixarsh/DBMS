@@ -1,0 +1,13 @@
+mysql> SELECT district, COUNT(*) AS no_of_address FROM address GROUP BY district WHERE district = 'Shandong' OR district = 'Buenos Aires' LIMIT 10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE district = 'Shandong' OR district = 'Buenos Aires' LIMIT 10' at line 1
+
+mysql> SELECT district, COUNT(*) AS no_of_address FROM address GROUP BY district HAVING district = 'Shandong' OR district = 'Buenos Aires';
++--------------+---------------+
+| district     | no_of_address |
++--------------+---------------+
+| Buenos Aires |            10 |
+| Shandong     |             9 |
++--------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> -- WHERE Clause is used for Rows while HAVING Clause is used for Groups;

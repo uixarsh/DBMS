@@ -1,0 +1,473 @@
+mysql> CREATE TABLE movies (id INT PRIMARY KEY, name VARCHAR(50), rating INT);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESC movies;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| rating | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO movies (rating, id, name) VALUES (5, 1, "Avengers");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW movies;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'movies' at line 1
+mysql> INSERT INTO movies (rating, id, name) VALUES (4, 2, "Thor love and thunder");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO movies (rating, id, name) VALUES (3, 3, "Antman"), (5, 4, "Avengers End-game");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM movies;
++----+-----------------------+--------+
+| id | name                  | rating |
++----+-----------------------+--------+
+|  1 | Avengers              |      5 |
+|  2 | Thor love and thunder |      4 |
+|  3 | Antman                |      3 |
+|  4 | Avengers End-game     |      5 |
++----+-----------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT name FROM movies;
++-----------------------+
+| name                  |
++-----------------------+
+| Avengers              |
+| Thor love and thunder |
+| Antman                |
+| Avengers End-game     |
++-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM movies;
++----+-----------------------+--------+
+| id | name                  | rating |
++----+-----------------------+--------+
+|  1 | Avengers              |      5 |
+|  2 | Thor love and thunder |      4 |
+|  3 | Antman                |      3 |
+|  4 | Avengers End-game     |      5 |
++----+-----------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO movies (rating, id, name) VALUES (5, 5, "Thor the dark world");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM movies;
++----+-----------------------+--------+
+| id | name                  | rating |
++----+-----------------------+--------+
+|  1 | Avengers              |      5 |
+|  2 | Thor love and thunder |      4 |
+|  3 | Antman                |      3 |
+|  4 | Avengers End-game     |      5 |
+|  5 | Thor the dark world   |      5 |
++----+-----------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM movies WHERE rating > 4;
++----+---------------------+--------+
+| id | name                | rating |
++----+---------------------+--------+
+|  1 | Avengers            |      5 |
+|  4 | Avengers End-game   |      5 |
+|  5 | Thor the dark world |      5 |
++----+---------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM movies WHERE rating > 4 and rating <=2;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM movies WHERE rating > 4 and rating <=3;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM movies WHERE rating > 4 OR rating <=3;
++----+---------------------+--------+
+| id | name                | rating |
++----+---------------------+--------+
+|  1 | Avengers            |      5 |
+|  3 | Antman              |      3 |
+|  4 | Avengers End-game   |      5 |
+|  5 | Thor the dark world |      5 |
++----+---------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM movies WHERE name = "Avengers";
++----+----------+--------+
+| id | name     | rating |
++----+----------+--------+
+|  1 | Avengers |      5 |
++----+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> DELETE FROM movies WHERE name = "Avengers";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM movies;
++----+-----------------------+--------+
+| id | name                  | rating |
++----+-----------------------+--------+
+|  2 | Thor love and thunder |      4 |
+|  3 | Antman                |      3 |
+|  4 | Avengers End-game     |      5 |
+|  5 | Thor the dark world   |      5 |
++----+-----------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> DELETE FROM movies WHERE rating < 5;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> SELECT * FROM movies;
++----+---------------------+--------+
+| id | name                | rating |
++----+---------------------+--------+
+|  4 | Avengers End-game   |      5 |
+|  5 | Thor the dark world |      5 |
++----+---------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> UPDATE movies SET rating = 4 WHERE id = 4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE DATABASE IF NOT EXISTS cinema;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE cinema;
+Database changed
+mysql> CREATE TABLE actors (firstName VARCHAR(50), lastName VARCHAR(50), gender VARCHAR(10), networth INT);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> DESC actors;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| firstName | varchar(50) | YES  |     | NULL    |       |
+| lastName  | varchar(50) | YES  |     | NULL    |       |
+| gender    | varchar(10) | YES  |     | NULL    |       |
+| networth  | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO actors (firstName, lastName, gender, networth) VALUES ("Johnny", "Depp", "Male", 200), ("Chris", "Hemsworth", "Male", 400), ("Scarlett", "Johnson", "Female", 500), ("Chris", "Evans", "Male", 600), ("Chadwick", "Boseman", "Male", 500);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM actors;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chris     | Evans     | Male   |      600 |
+| Chadwick  | Boseman   | Male   |      500 |
++-----------+-----------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO actors (firstName, lastName, gender, networth) VALUES ("Paul", "Rudd", "Male", 130), ("Brie", "Larson", "Female", 324);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM actors;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chris     | Evans     | Male   |      600 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Paul      | Rudd      | Male   |      130 |
+| Brie      | Larson    | Female |      324 |
++-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors ORDER BY networth;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Paul      | Rudd      | Male   |      130 |
+| Johnny    | Depp      | Male   |      200 |
+| Brie      | Larson    | Female |      324 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Evans     | Male   |      600 |
++-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors ORDER BY networth DESC;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chris     | Evans     | Male   |      600 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Hemsworth | Male   |      400 |
+| Brie      | Larson    | Female |      324 |
+| Johnny    | Depp      | Male   |      200 |
+| Paul      | Rudd      | Male   |      130 |
++-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors ORDER BY networth ASC;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Paul      | Rudd      | Male   |      130 |
+| Johnny    | Depp      | Male   |      200 |
+| Brie      | Larson    | Female |      324 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Evans     | Male   |      600 |
++-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors WHERE firstName LIKE "Ch%";
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chris     | Hemsworth | Male   |      400 |
+| Chris     | Evans     | Male   |      600 |
+| Chadwick  | Boseman   | Male   |      500 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors WHERE firstName LIKE "Ch%" ORDER BY networth DESC;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chris     | Evans     | Male   |      600 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Hemsworth | Male   |      400 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors WHERE firstName LIKE "Ch%" ORDER BY firstname;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Hemsworth | Male   |      400 |
+| Chris     | Evans     | Male   |      600 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors WHERE firstName LIKE "Ch%" ORDER BY lastname;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Evans     | Male   |      600 |
+| Chris     | Hemsworth | Male   |      400 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors WHERE firstName LIKE "Ch%" ORDER BY firstName, networth DESC;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chadwick  | Boseman   | Male   |      500 |
+| Chris     | Evans     | Male   |      600 |
+| Chris     | Hemsworth | Male   |      400 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 3;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 2;
+Display all 758 possibilities? (y or n)
+mysql> SELECT * FROM actors LIMIT 2;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
++-----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 2 OFFSET 0;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
++-----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 2 OFFSET 1;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
++-----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 3 OFFSET 2;
++-----------+----------+--------+----------+
+| firstName | lastName | gender | networth |
++-----------+----------+--------+----------+
+| Scarlett  | Johnson  | Female |      500 |
+| Chris     | Evans    | Male   |      600 |
+| Chadwick  | Boseman  | Male   |      500 |
++-----------+----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 3 OFFSET 0;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
++-----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 3 OFFSET 3;
++-----------+----------+--------+----------+
+| firstName | lastName | gender | networth |
++-----------+----------+--------+----------+
+| Chris     | Evans    | Male   |      600 |
+| Chadwick  | Boseman  | Male   |      500 |
+| Paul      | Rudd     | Male   |      130 |
++-----------+----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors LIMIT 3 OFFSET 6;
++-----------+----------+--------+----------+
+| firstName | lastName | gender | networth |
++-----------+----------+--------+----------+
+| Brie      | Larson   | Female |      324 |
++-----------+----------+--------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT firstName, lastName FROM actors LIMIT 3 OFFSET 6;
++-----------+----------+
+| firstName | lastName |
++-----------+----------+
+| Brie      | Larson   |
++-----------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT firstName, lastName FROM actors;
++-----------+-----------+
+| firstName | lastName  |
++-----------+-----------+
+| Johnny    | Depp      |
+| Chris     | Hemsworth |
+| Scarlett  | Johnson   |
+| Chris     | Evans     |
+| Chadwick  | Boseman   |
+| Paul      | Rudd      |
+| Brie      | Larson    |
++-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT firstName AS first, lastName as last FROM actors;
++----------+-----------+
+| first    | last      |
++----------+-----------+
+| Johnny   | Depp      |
+| Chris    | Hemsworth |
+| Scarlett | Johnson   |
+| Chris    | Evans     |
+| Chadwick | Boseman   |
+| Paul     | Rudd      |
+| Brie     | Larson    |
++----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM actors;
++-----------+-----------+--------+----------+
+| firstName | lastName  | gender | networth |
++-----------+-----------+--------+----------+
+| Johnny    | Depp      | Male   |      200 |
+| Chris     | Hemsworth | Male   |      400 |
+| Scarlett  | Johnson   | Female |      500 |
+| Chris     | Evans     | Male   |      600 |
+| Chadwick  | Boseman   | Male   |      500 |
+| Paul      | Rudd      | Male   |      130 |
+| Brie      | Larson    | Female |      324 |
++-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> DROP TABLE actors;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE actors (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, firstName VARCHAR(50), lastName VARCHAR(50), gen
+der VARCHAR(10), networth INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC actors;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| firstName | varchar(50) | YES  |     | NULL    |                |
+| lastName  | varchar(50) | YES  |     | NULL    |                |
+| gender    | varchar(10) | YES  |     | NULL    |                |
+| networth  | int         | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT INTO actors (firstName, lastName, gender, networth) VALUES ("Johnny", "Depp", "Male", 200), ("Chris", "Hemsworth", "Male", 400), ("Scarlett", "Johnson", "Female", 500), ("Chris", "Evans", "Male", 600), ("Chadwick", "Boseman", "Male", 500);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM actors;
++----+-----------+-----------+--------+----------+
+| id | firstName | lastName  | gender | networth |
++----+-----------+-----------+--------+----------+
+|  1 | Johnny    | Depp      | Male   |      200 |
+|  2 | Chris     | Hemsworth | Male   |      400 |
+|  3 | Scarlett  | Johnson   | Female |      500 |
+|  4 | Chris     | Evans     | Male   |      600 |
+|  5 | Chadwick  | Boseman   | Male   |      500 |
++----+-----------+-----------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO actors (firstName, lastName, gender, networth) VALUES ("Paul", "Rudd", "Male", 130), ("Brie", "Larson", "Female", 324);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM actors;
++----+-----------+-----------+--------+----------+
+| id | firstName | lastName  | gender | networth |
++----+-----------+-----------+--------+----------+
+|  1 | Johnny    | Depp      | Male   |      200 |
+|  2 | Chris     | Hemsworth | Male   |      400 |
+|  3 | Scarlett  | Johnson   | Female |      500 |
+|  4 | Chris     | Evans     | Male   |      600 |
+|  5 | Chadwick  | Boseman   | Male   |      500 |
+|  6 | Paul      | Rudd      | Male   |      130 |
+|  7 | Brie      | Larson    | Female |      324 |
++----+-----------+-----------+--------+----------+
+7 rows in set (0.00 sec)
